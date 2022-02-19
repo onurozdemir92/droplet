@@ -6,10 +6,14 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  FlatList,
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Header from '../../component/Header';
+import PostComponent from '../../component/PostComponent';
+import StoryHeaderItem from '../../component/StoryHeaderItem';
+import { PostDates } from '../../data/DummyData';
 
-import Styles from './styles';
+import styles from './styles';
 const data = [
   {
     a:
@@ -68,46 +72,31 @@ const data = [
       'https://images.unsplash.com/photo-1491545437994-ebc9551b87d7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjIwfHxwcm9maWxlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   },
 ];
+
 const Home = () => {
   return (
-    <SafeAreaView style={Styles.container}>
-      <View style={Styles.header}>
-        <Text style={Styles.logo}>Droplet</Text>
-        <TouchableOpacity>
-          <FontAwesome name="send" size={20} color="black" />
-        </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <Header />
+
+      <View style={styles.postContainer}>
+        <FlatList
+          ListHeaderComponent={
+            <View>
+              <ScrollView
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+                style={styles.storyScroll}>
+                {data.map((item: any, index) => <StoryHeaderItem key={index} imageUrl={item.a} />)}
+              </ScrollView>
+            </View>
+          }
+          data={PostDates}
+          renderItem={({ item, index }) => <PostComponent {...item} />}
+          keyExtractor={(item, index) => index.toString()}
+        />
       </View>
-      <ScrollView>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          style={Styles.storyScroll}>
-          {data.map((item: any) => {
-            return (
-              <TouchableOpacity style={Styles.storyContainer}>
-                <Image
-                  style={Styles.storyImage}
-                  source={{
-                    uri: item.a,
-                  }}
-                />
-                <View style={Styles.storyUserAvatarContainer}>
-                  <Image
-                    source={{
-                      uri:
-                        'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjN8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                    }}
-                    style={Styles.storyAvatarImage}
-                  />
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-        {data.map(() => {
-          return <View style={Styles.postContainer}></View>;
-        })}
-      </ScrollView>
+
+
     </SafeAreaView>
   );
 };

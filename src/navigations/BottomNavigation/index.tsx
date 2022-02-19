@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -9,8 +8,12 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import HomeScreen from '../../screen/Home';
 import DiscoveryScreen from '../../screen/Discovery';
 import ProfileScreen from '../../screen/Profile';
+import JobScreen from '../../screen/Job';
+
+import { Colors } from '../../theme';
 
 const Tab = createBottomTabNavigator();
+
 const BottomNavigation = () => {
   return (
     <Tab.Navigator
@@ -30,7 +33,7 @@ const BottomNavigation = () => {
           tabBarLabel: '',
           tabBarIcon: (tintColor) => (
             <>
-              <Entypo name="home" size={tintColor.size} color={'black'} />
+              <Entypo name="home" size={tintColor.size} color={Colors.mainColor} />
               {tintColor.focused == true ? (
                 <Octicons
                   name="primitive-dot"
@@ -49,7 +52,7 @@ const BottomNavigation = () => {
           tabBarLabel: '',
           tabBarIcon: (tintColor: any) => (
             <>
-              <Ionicons name="search" size={tintColor.size} color={'black'} />
+              <Ionicons name="search" size={tintColor.size} color={Colors.mainColor} />
               {tintColor.focused == true ? (
                 <Octicons
                   name="primitive-dot"
@@ -68,7 +71,7 @@ const BottomNavigation = () => {
           tabBarLabel: '',
           tabBarIcon: (tintColor) => (
             <>
-              <Entypo name="laptop" size={tintColor.size} color={'black'} />
+              <Entypo name="laptop" size={tintColor.size} color={Colors.mainColor} />
               {tintColor.focused == true ? (
                 <Octicons
                   name="primitive-dot"
@@ -80,14 +83,14 @@ const BottomNavigation = () => {
           ),
         }}
         name="Freelancer"
-        component={HomeScreen}
+        component={JobScreen}
       />
       <Tab.Screen
         options={{
           tabBarLabel: 'Hello Word',
           tabBarIcon: (tintColor) => (
             <>
-              <Ionicons name="person" size={tintColor.size} color={'black'} />
+              <Ionicons name="person" size={tintColor.size} color={Colors.mainColor} />
               {tintColor.focused == true ? (
                 <Octicons
                   name="primitive-dot"
