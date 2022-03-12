@@ -1,10 +1,23 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import { SafeAreaView, ScrollView, Text } from 'react-native';
+import AppHeader from '../../component/AppHeader';
+import ChatListItem from '../../component/ChatListItem';
+import { Screens } from '../../navigations/StackNavigation';
 
 const ChatList = () => {
+
+  const navigation = useNavigation()
+
   return (
     <SafeAreaView>
-      <Text>ChatList</Text>
+      <AppHeader goBack />
+      <ScrollView>
+        <ChatListItem onPress={() => navigation.navigate(Screens.chat)} />
+        <ChatListItem />
+        <ChatListItem />
+
+      </ScrollView>
     </SafeAreaView>
   );
 };
